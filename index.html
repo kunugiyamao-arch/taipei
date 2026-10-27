@@ -134,10 +134,31 @@ const P={
   ningxia:{zh:"寧夏夜市",addr:"台北市大同區寧夏路（民生西路口）",ja:"寧夏夜市"},
   jiufen:{zh:"九份老街",addr:"新北市瑞芳區基山街",ja:"九份老街"},
   tpe:{zh:"桃園國際機場",addr:"第＿航廈（星宇航空）",ja:"桃園空港（ターミナル番号を書き足す）"},
-  huaxi:{zh:"華西街觀光夜市",addr:"台北市萬華區華西街",ja:"華西街夜市（雨天時）"}
+  huaxi:{zh:"華西街觀光夜市",addr:"台北市萬華區華西街",ja:"華西街夜市（雨天時）"},
+  linfang:{zh:"林東芳牛肉麵",addr:"台北市中山區八德路二段322號",ja:"林東芳牛肉麵"},
+  songyan:{zh:"誠品生活松菸店",addr:"台北市信義區菸廠路88號（松山文創園區）",ja:"誠品生活松菸（松山文創園区）"}
 };
 
 const DAYS=[
+{id:"d5",tab:"5",dow:"木",date:"11/5（木）",title:"到着日：牛肉麵で一杯目の台湾",ret:"21:00",
+ chips:["16時 桃園着","移動日は軽めに"],
+ lead:"16時に桃園空港着。空港からはタクシーでホテルへ直行し、夜は深夜まで開いている牛肉麵の名店で軽く夕食。初日は早めに休みます。",
+ modes:{
+  normal:[["16:00","桃園空港着。入国審査・荷物受け取り","約30〜60分"],
+   ["16:45","空港で両替、悠遊卡（EasyCard）を購入。SIMやWi-Fiもここで","MRT・コンビニで6日以降ずっと使う"],
+   ["17:00","タクシー乗り場からホテルへ","45〜55分・NT$1,260〜1,500（夕方は渋滞で延びることあり）"],
+   ["18:00","ホテル着、チェックイン、ひと休み",""],
+   ["19:00","ホテル前からタクシーで林東芳牛肉麵へ","約3km・約10分・NT$130〜170"],
+   ["19:15","林東芳牛肉麵で夕食","〜20:00"],
+   ["20:05","タクシーで松山文創園区へ。誠品生活松菸で本や雑貨を見る","約10分。ホテルまで歩いて帰れる距離"],
+   ["21:00","ホテル着（コンビニに寄って飲み物など）","徒歩約10分"]],
+  late:{note:"空港を出るのが18時を過ぎたら、牛肉麵はやめてホテル周辺で済ませます。林東芳は深夜3時まで営業なので、元気があれば21時台でも行けます。ホテル近くのコンビニで台湾のお茶やおにぎりを買うのも、それはそれで楽しいです。"},
+  rain:{note:"そのまま実施できます。牛肉麵は店内、誠品生活松菸も屋内です。松菸からホテルへはタクシーで戻ります。"}
+ },
+ food:[["林東芳牛肉麵","価格未確認","八德路二段322号。11:00〜翌3:00、定休日なし。すじ肉と赤身がのった半筋半肉麵が定番"]],
+ foodNote:"空港からは、荷物と人数を考えるとタクシーが楽です（4人で割れば1人NT$320〜380）。MRTなら空港線の直達車で台北駅まで行き、板南線に乗り換えて国父紀念館へ（台北駅での乗り換えは徒歩が長め）。空港線の台北行き最終は22:57（第1ターミナル駅）。",
+ links:[],
+ taxi:["linfang","songyan"]},
 {id:"d6",tab:"6",dow:"金",date:"11/6（金）",title:"鼎泰豊 復興店と東区",ret:"21:45",
  chips:["本場の小籠包","MRTで2駅"],
  lead:"金曜だけ21:00まで営業する復興店で小籠包。待ち時間はSOGOで買い物、食後は忠孝東路を歩いて帰ります。",
@@ -251,13 +272,13 @@ function taxiBtns(keys){
 
 function renderTop(){
   return `<section class="dayhead"><h2>仕事のあと、毎晩ひとつずつ台北を味わう</h2>
-  <p class="note">毎日18:15ホテル出発、22時ごろ帰着。本格的な夜市は2回、座って食べる名店が2回、夜景が1回。最終日は朝の九份に寄って空港へ。</p></section>
+  <p class="note">到着日は牛肉麵で軽く。仕事の日は毎日18:15ホテル出発、22時ごろ帰着。本格的な夜市は2回、座って食べる名店が2回、夜景が1回。最終日は朝の九份に寄って空港へ。</p></section>
   <section class="cards">${DAYS.map(d=>`<button class="dcard" data-go="${d.id}">
     <span class="d">${d.tab}<small>${d.dow}曜</small></span>
     <span><span class="ttl">${esc(d.title)}</span><br><span class="meta">${d.chips.map(esc).join("・")}</span></span>
     <span class="ret">${d.id==="d10"?esc(d.ret):"帰着 "+esc(d.ret)}</span></button>`).join("")}</section>
-  <section class="panel"><h3>1人あたりの予算（11/6〜11/9）</h3>
-  <p><b style="font-size:20px;font-variant-numeric:tabular-nums">NT$3,540〜4,640</b>　<span class="note">約17,090〜22,410円</span></p>
+  <section class="panel"><h3>1人あたりの予算（11/5〜11/9）</h3>
+  <p><b style="font-size:20px;font-variant-numeric:tabular-nums">NT$4,100〜5,360</b>　<span class="note">約19,790〜25,890円</span></p>
   <p class="note">タクシーは4人で割り勘、買い物代は除く。1NT$＝約4.83円（10/27時点）。11/10の九份・空港送迎は見積もり次第です。</p></section>
   <section class="panel"><h3>使い方</h3><ul class="plain">
    <li>上の日付をタップすると、その日の時間割が出ます。滞在中は今日の日付が自動で開きます。</li>
@@ -292,14 +313,14 @@ function renderDay(d){
 function score(n){return `<span class="score" aria-label="${n}点">${[1,2,3,4,5].map(i=>`<i class="${i<=n?"on":""}"></i>`).join("")}</span>`}
 
 function renderInfo(){
-  const tx=[["ホテル↔鼎泰豊 復興店","MRT","NT$110〜140・約10分","板南線で2駅・約4分"],["ホテル↔饒河街夜市","タクシー","NT$170〜220・12〜18分","後山埤まで3駅＋徒歩15分"],["ホテル→台北101","タクシー","NT$110〜140・8〜12分","市政府まで1駅＋徒歩10分"],["台北101→臨江街夜市","MRT","NT$100〜130・約5分","信義安和まで1駅＋徒歩8分"],["臨江街夜市→ホテル","タクシー","NT$130〜170・10〜15分","乗換あり・非推奨"],["ホテル→欣葉 創始店","タクシー","NT$230〜290・20〜28分","乗換1回・約35分"],["欣葉→寧夏夜市","タクシー","NT$110〜140・約10分","―"],["寧夏夜市→ホテル","タクシー","NT$250〜300・20〜25分","乗換1回・約30分"]];
-  const bd=[["11/6（金）","800〜1,000","3,860〜4,830"],["11/7（土）","500〜700","2,420〜3,380"],["11/8（日）","1,090〜1,290","5,260〜6,230"],["11/9（月）","1,150〜1,650","5,550〜7,970"]];
+  const tx=[["桃園空港→ホテル","タクシー","NT$1,260〜1,500・45〜55分","空港線直達車＋板南線、乗換1回"],["ホテル↔鼎泰豊 復興店","MRT","NT$110〜140・約10分","板南線で2駅・約4分"],["ホテル↔饒河街夜市","タクシー","NT$170〜220・12〜18分","後山埤まで3駅＋徒歩15分"],["ホテル→台北101","タクシー","NT$110〜140・8〜12分","市政府まで1駅＋徒歩10分"],["台北101→臨江街夜市","MRT","NT$100〜130・約5分","信義安和まで1駅＋徒歩8分"],["臨江街夜市→ホテル","タクシー","NT$130〜170・10〜15分","乗換あり・非推奨"],["ホテル→欣葉 創始店","タクシー","NT$230〜290・20〜28分","乗換1回・約35分"],["欣葉→寧夏夜市","タクシー","NT$110〜140・約10分","―"],["寧夏夜市→ホテル","タクシー","NT$250〜300・20〜25分","乗換1回・約30分"]];
+  const bd=[["11/5（木）","560〜720","2,700〜3,480"],["11/6（金）","800〜1,000","3,860〜4,830"],["11/7（土）","500〜700","2,420〜3,380"],["11/8（日）","1,090〜1,290","5,260〜6,230"],["11/9（月）","1,150〜1,650","5,550〜7,970"]];
   const ev=[["台湾らしさ",3,5,4,5],["グルメの満足度",5,4,4,5],["ホテルからのアクセス",5,3,4,2],["仕事後の疲れにくさ",4,3,3,4],["時間どおりに回れるか",3,5,4,4]];
   const src=[["鼎泰豊 台北店舗一覧・営業時間","https://nativecamp.net/blog/20251015_study_abroad_taiwan"],["鼎泰豊 2026年6月の価格改定","https://udn.com/news/story/7241/9571144"],["台北101展望台 料金・営業時間","https://www.funtime.com.tw/localtour/taipei-101"],["饒河街夜市の交通と屋台","https://supertaste.tvbs.com.tw/amp/food/356346"],["臨江街夜市の屋台と営業時間","https://travel.yam.com/Article/135974"],["寧夏夜市の屋台と営業時間","https://travel.yam.com/article/131342"],["欣葉台菜 創始店 予約","https://www.tablecheck.com/shops/shin-yeh-main-restaurant/reserve"],["台北市タクシー料金","https://roo.cash/blog/?p=109132"],["九份老街の朝の開店時間","https://uptogo.com.tw/旅遊/九份老街早上有開嗎？/"],["スターラックス航空 日本路線","https://www.aviationwire.jp/?p=349081"],["為替レート（10/27）","https://www.ixigo.com/travel-guide/currency-converter/jpy-to-twd"]];
   return `<section class="dayhead"><h2>交通・予算・評価</h2><p class="note">3〜4人なら、乗換がある区間はタクシーの方が楽で、割り勘すれば1人NT$50〜80ほどです。</p></section>
   <section class="panel"><h3>タクシー料金のしくみ</h3><p class="note">初乗り1.25kmまでNT$85、以降200mごとにNT$5。渋滞中は60秒ごとにNT$5。23:00〜6:00は1回NT$20加算。黄色い車体を手を上げて止めます。</p></section>
   <section class="panel"><h3>区間ごとのおすすめ</h3><div class="scroll"><table><thead><tr><th>区間</th><th>おすすめ</th><th>タクシー（1台）</th><th>MRTなら</th></tr></thead><tbody>${tx.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="n">${r[2]}</td><td>${r[3]}</td></tr>`).join("")}</tbody></table></div></section>
-  <section class="panel"><h3>1人あたりの予算</h3><div class="scroll"><table><thead><tr><th>日</th><th>NT$</th><th>円</th></tr></thead><tbody>${bd.map(r=>`<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td></tr>`).join("")}<tr class="total"><td>合計</td><td class="n">3,540〜4,640</td><td class="n">17,090〜22,410</td></tr></tbody></table></div>
+  <section class="panel"><h3>1人あたりの予算</h3><div class="scroll"><table><thead><tr><th>日</th><th>NT$</th><th>円</th></tr></thead><tbody>${bd.map(r=>`<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td></tr>`).join("")}<tr class="total"><td>合計</td><td class="n">4,100〜5,360</td><td class="n">19,790〜25,890</td></tr></tbody></table></div>
    <p class="note" style="margin-top:8px">1NT$＝約4.83円。両替手数料は別。屋台用に1人NT$1,000程度の小銭を。</p></section>
   <section class="panel"><h3>各日の評価（5点満点）</h3><div class="scroll"><table><thead><tr><th></th><th>6金</th><th>7土</th><th>8日</th><th>9月</th></tr></thead><tbody>${ev.map(r=>`<tr><td>${r[0]}</td>${r.slice(1).map(n=>`<td>${score(n)}</td>`).join("")}</tr>`).join("")}<tr class="total"><td>合計（25点）</td><td class="n">20</td><td class="n">20</td><td class="n">19</td><td class="n">20</td></tr></tbody></table></div></section>
   <section class="panel"><h3>参照したページ</h3><div class="links">${src.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}</div></section>`;
@@ -320,7 +341,7 @@ function go(id,push=true){
 
 function taipeiToday(){
   const s=new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Taipei"});
-  const map={"2026-11-06":"d6","2026-11-07":"d7","2026-11-08":"d8","2026-11-09":"d9","2026-11-10":"d10"};
+  const map={"2026-11-05":"d5","2026-11-06":"d6","2026-11-07":"d7","2026-11-08":"d8","2026-11-09":"d9","2026-11-10":"d10"};
   return map[s];
 }
 
